@@ -2,12 +2,31 @@
 
 This project integrates the Poly Micro Frontend and Backend into a desktop application using Tauri, all containerized with Docker.
 
-## Project Structure
+## Prerequisites
 
-- `poly-micro-backend/` - FastAPI backend service
-- `poly-micro-frontend/` - React frontend application
-- `src/` - Tauri wrapper application code
-- `src-tauri/` - Tauri configuration and Rust code
+- Docker and Docker Compose
+- Git
+
+## Setup
+
+1. Clone the repository:
+
+```bash
+git clone https://github.com/siriknikita/poly-micro-manager-app.git
+```
+
+2. Navigate to the root directory:
+
+```bash
+cd poly-micro-manager-app
+```
+
+3. Initialize submodules:
+
+```bash
+git submodule update --init --recursive
+```
+
 
 ## Two Ways to Run the Application
 
@@ -23,12 +42,6 @@ This project integrates the Poly Micro Frontend and Backend into a desktop appli
 ```bash
 # For a normal startup:
 ./run.sh
-
-# If you need to fix connectivity issues:
-./fix-and-run.sh
-
-# If you need to reset everything:
-./force-restart.sh
 ```
 
 This will start:
@@ -107,9 +120,6 @@ This will open a native desktop window with your application.
 ## Utility Scripts
 
 - `run.sh` - Start all services and show logs
-- `fix-and-run.sh` - Stop existing containers, rebuild them with updated configurations, and start all services
-- `force-restart.sh` - Force stop all containers and remove volumes, then rebuild and start all containers
-- `restart-tauri.sh` - Restart only the Tauri container after configuration changes
 
 ## Configuration
 
@@ -119,5 +129,4 @@ Configuration is managed through environment variables defined in the docker-com
 
 - **GTK errors in Docker**: These are expected and handled by the headless mode
 - **Port conflicts**: If ports are already in use, modify them in docker-compose.yml
-- **Connectivity issues**: If containers can't connect to each other, use the fix-and-run.sh script
 - **Wayland/Hyprland issues**: If you have display issues in local development, check that you have the proper Wayland support packages installed
