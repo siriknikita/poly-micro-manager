@@ -1,0 +1,6 @@
+[submodule "poly-micro-frontend"]
+	path = poly-micro-frontend
+	url = https://github.com/siriknikita/poly-micro-frontend.git
+[submodule "poly-micro-backend"]
+	path = poly-micro-backend
+	url = https://github.com/siriknikita/poly-micro-backend.git

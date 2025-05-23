@@ -1,0 +1,124 @@
+services:
+  # Backend services
+  mongodb:
+    image: mongo:latest
+    container_name: poly-micro-mongodb
+    command: ["--bind_ip_all"]
+    ports:
+      - "27019:27017"
+    volumes:
+      - mongodb_data:/data/db
+    environment:
+      - MONGO_INITDB_DATABASE=Lab2
+    networks:
+      - poly-micro-network
+    healthcheck:
+      test: mongosh --quiet --eval "'db.runCommand({ping:1}).ok' || exit 1"
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 20s
+    restart: unless-stopped
+
+  redis:
+    image: redis:alpine
+    container_name: poly-micro-redis
+    ports:
+      - "6380:6379"
+    volumes:
+      - redis_data:/data
+    networks:
+      - poly-micro-network
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+    restart: unless-stopped
+
+  backend:
+    build:
+      context: ./poly-micro-backend
+      dockerfile: Dockerfile
+      args:
+        BUILDKIT_INLINE_CACHE: 1
+      cache_from:
+        - poly-micro-backend:latest
+    image: poly-micro-backend:latest
+    container_name: poly-micro-backend
+    ports:
+      - "8000:8000"
+    depends_on:
+      redis:
+        condition: service_healthy
+      mongodb:
+        condition: service_started
+    environment:
+      - MONGO_URI=mongodb+srv://nikitasirik2:Fckz0RiolIOmcqgK@lab2.2gwtd.mongodb.net/?retryWrites=true&w=majority&appName=Lab2
+      - MONGO_DB=Lab2
+      - HOST=0.0.0.0
+      - PORT=8000
+      - RELOAD=False
+      - ENV=production
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - CACHE_ENABLED=True
+      - PYTHONPATH=/app
+    networks:
+      - poly-micro-network
+    restart: unless-stopped
+
+  # Frontend service
+  frontend:
+    build:
+      context: ./poly-micro-frontend
+      dockerfile: Dockerfile
+    image: poly-micro-frontend:latest
+    container_name: poly-micro-frontend
+    ports:
+      - "3001:80"
+    networks:
+      - poly-micro-network
+    depends_on:
+      - backend
+    restart: unless-stopped
+
+  # Tauri Application
+  tauri:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    image: poly-micro-tauri:latest
+    container_name: poly-micro-tauri
+    volumes:
+      - ./:/app
+      - /run/user/1000:/run/user/1000
+      - /tmp/.X11-unix:/tmp/.X11-unix
+      - tauri_target:/app/target
+      - tauri_node_modules:/app/node_modules
+    ports:
+      - "6080:3001"
+    environment:
+      - WAYLAND_DISPLAY=${WAYLAND_DISPLAY:-wayland-0}
+      - XDG_RUNTIME_DIR=/run/user/1000
+      - DISPLAY=:0
+      - BACKEND_URL=http://backend:8000
+      - FRONTEND_URL=http://frontend:80
+      - poly-micro-network
+    depends_on:
+      - frontend
+      - backend
+    # Add device access for GPU acceleration
+    devices:
+      - /dev/dri:/dev/dri
+    restart: unless-stopped
+
+networks:
+  poly-micro-network:
+    driver: bridge
+
+volumes:
+  mongodb_data:
+  redis_data:
+  tauri_target:
+  tauri_node_modules:
