@@ -47,23 +47,24 @@ services:
     image: poly-micro-backend:latest
     container_name: poly-micro-backend
     ports:
-      - "8000:8000"
+      - "0.0.0.0:8000:8000"
     depends_on:
       redis:
         condition: service_healthy
       mongodb:
         condition: service_started
     environment:
-      - MONGO_URI=mongodb+srv://nikitasirik2:Fckz0RiolIOmcqgK@lab2.2gwtd.mongodb.net/?retryWrites=true&w=majority&appName=Lab2
-      - MONGO_DB=Lab2
-      - HOST=0.0.0.0
-      - PORT=8000
-      - RELOAD=False
-      - ENV=production
-      - REDIS_HOST=redis
-      - REDIS_PORT=6379
-      - CACHE_ENABLED=True
+      - MONGO_URI=${MONGO_URI}
+      - MONGO_DB=${MONGO_DB}
+      - HOST=${HOST}
+      - PORT=${PORT}
+      - RELOAD=${RELOAD}
+      - ENV=${ENV}
+      - REDIS_HOST=${REDIS_HOST}
+      - REDIS_PORT=${REDIS_PORT}
+      - CACHE_ENABLED=${CACHE_ENABLED}
       - PYTHONPATH=/app
+      - GEMINI_API_KEY=${GEMINI_API_KEY}
     networks:
       - poly-micro-network
     restart: unless-stopped
@@ -104,11 +105,12 @@ services:
       - DISPLAY=:0
       - BACKEND_URL=http://backend:8000
       - FRONTEND_URL=http://frontend:80
+      - VITE_BACKEND_URL=http://backend:8000
+    networks:
       - poly-micro-network
     depends_on:
       - frontend
       - backend
-    # Add device access for GPU acceleration
     devices:
       - /dev/dri:/dev/dri
     restart: unless-stopped

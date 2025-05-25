@@ -1,0 +1,25 @@
+# MongoDB Connection
+MONGO_URI=mongodb+srv://your-mongodb-username:your-mongodb-password@your-mongodb-host/your-mongodb-database
+MONGO_DB=your-mongodb-database
+
+# Server Configuration
+HOST=0.0.0.0
+PORT=8000
+RELOAD=True
+
+# Environment
+ENV=development
+# ENV=production
+
+# Redis
+REDIS_HOST=redis
+REDIS_PORT=6379
+CACHE_ENABLED=True
+
+# JWT Authentication
+JWT_SECRET_KEY=YourSuperSecretKeyHere
+JWT_ALGORITHM=HS256
+ACCESS_TOKEN_EXPIRE_MINUTES=30
+
+# Gemini API
+GEMINI_API_KEY=your-gemini-api-key
