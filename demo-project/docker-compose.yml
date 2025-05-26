@@ -1,0 +1,42 @@
+version: '3.8'
+
+services:
+  x-service:
+    build:
+      context: ./x-service
+      dockerfile: Dockerfile
+    container_name: demo-x-service
+    ports:
+      - "8001:8001"
+    volumes:
+      - ./x-service:/app
+      - ./tests:/tests
+    environment:
+      - PYTHONPATH=/app
+      - SERVICE_NAME=x-service
+      - LOG_LEVEL=INFO
+    networks:
+      - demo-network
+
+  y-service:
+    build:
+      context: ./y-service
+      dockerfile: Dockerfile
+    container_name: demo-y-service
+    ports:
+      - "8002:8002"
+    volumes:
+      - ./y-service:/app
+      - ./tests:/tests
+    environment:
+      - PYTHONPATH=/app
+      - SERVICE_NAME=y-service
+      - LOG_LEVEL=INFO
+    networks:
+      - demo-network
+
+  # You can add additional services like a database, message broker, etc.
+
+networks:
+  demo-network:
+    driver: bridge
