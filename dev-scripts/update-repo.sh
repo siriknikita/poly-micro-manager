@@ -7,8 +7,10 @@ cd poly-micro-backend
 if [ -z "$(git status --porcelain)" ]; then
     echo "No changes to commit, skipping"
 else
+    git checkout main
     git add .
     git commit -m "$COMMIT_MESSAGE"
+    git push
 fi
 cd ..
 
@@ -17,8 +19,10 @@ cd poly-micro-frontend
 if [ -z "$(git status --porcelain)" ]; then
     echo "No changes to commit, skipping"
 else
+    git checkout main
     git add .
     git commit -m "$COMMIT_MESSAGE"
+    git push
 fi
 cd ..
 
@@ -29,7 +33,7 @@ else
     git submodule update --remote
     git add .
     git commit -m "$COMMIT_MESSAGE"
+    git push
 fi
-cd ..
 
 echo "All repositories have been updated successfully."
