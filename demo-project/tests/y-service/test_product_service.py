@@ -7,7 +7,7 @@ class TestProductAPI:
 
     def test_create_product(self):
         """Test creating a new product"""
-        assert True
+        assert False
 
     def test_update_product(self):
         """Test updating an existing product"""

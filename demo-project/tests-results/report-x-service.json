@@ -1,0 +1,154 @@
+{
+  "created": 1748446871.3764224,
+  "duration": 0.020786762237548828,
+  "exitcode": 0,
+  "root": "/tests/x-service",
+  "environment": {},
+  "summary": { "passed": 6, "total": 6, "collected": 6 },
+  "collectors": [
+    {
+      "nodeid": "",
+      "outcome": "passed",
+      "result": [{ "nodeid": "test_user_service.py", "type": "Module" }]
+    },
+    {
+      "nodeid": "test_user_service.py::TestUserAPI",
+      "outcome": "passed",
+      "result": [
+        {
+          "nodeid": "test_user_service.py::TestUserAPI::test_get_user",
+          "type": "Function",
+          "lineno": 3
+        },
+        {
+          "nodeid": "test_user_service.py::TestUserAPI::test_create_user",
+          "type": "Function",
+          "lineno": 7
+        },
+        {
+          "nodeid": "test_user_service.py::TestUserAPI::test_update_user",
+          "type": "Function",
+          "lineno": 11
+        },
+        {
+          "nodeid": "test_user_service.py::TestUserAPI::test_delete_user",
+          "type": "Function",
+          "lineno": 15
+        }
+      ]
+    },
+    {
+      "nodeid": "test_user_service.py::TestUserValidation",
+      "outcome": "passed",
+      "result": [
+        {
+          "nodeid": "test_user_service.py::TestUserValidation::test_email_validation",
+          "type": "Function",
+          "lineno": 20
+        },
+        {
+          "nodeid": "test_user_service.py::TestUserValidation::test_password_validation",
+          "type": "Function",
+          "lineno": 24
+        }
+      ]
+    },
+    {
+      "nodeid": "test_user_service.py",
+      "outcome": "passed",
+      "result": [
+        { "nodeid": "test_user_service.py::TestUserAPI", "type": "Class" },
+        {
+          "nodeid": "test_user_service.py::TestUserValidation",
+          "type": "Class"
+        }
+      ]
+    }
+  ],
+  "tests": [
+    {
+      "nodeid": "test_user_service.py::TestUserAPI::test_get_user",
+      "lineno": 3,
+      "outcome": "passed",
+      "keywords": [
+        "test_get_user",
+        "TestUserAPI",
+        "test_user_service.py",
+        "x-service"
+      ],
+      "setup": { "duration": 0.0004121799975109752, "outcome": "passed" },
+      "call": { "duration": 0.00016559800133109093, "outcome": "passed" },
+      "teardown": { "duration": 0.00026583500221022405, "outcome": "passed" }
+    },
+    {
+      "nodeid": "test_user_service.py::TestUserAPI::test_create_user",
+      "lineno": 7,
+      "outcome": "passed",
+      "keywords": [
+        "test_create_user",
+        "TestUserAPI",
+        "test_user_service.py",
+        "x-service"
+      ],
+      "setup": { "duration": 0.00014781999925617129, "outcome": "passed" },
+      "call": { "duration": 0.0001393710008414928, "outcome": "passed" },
+      "teardown": { "duration": 0.00021171299886191264, "outcome": "passed" }
+    },
+    {
+      "nodeid": "test_user_service.py::TestUserAPI::test_update_user",
+      "lineno": 11,
+      "outcome": "passed",
+      "keywords": [
+        "test_update_user",
+        "TestUserAPI",
+        "test_user_service.py",
+        "x-service"
+      ],
+      "setup": { "duration": 0.0001391059995512478, "outcome": "passed" },
+      "call": { "duration": 0.00014218299838830717, "outcome": "passed" },
+      "teardown": { "duration": 0.00019899299877579324, "outcome": "passed" }
+    },
+    {
+      "nodeid": "test_user_service.py::TestUserAPI::test_delete_user",
+      "lineno": 15,
+      "outcome": "passed",
+      "keywords": [
+        "test_delete_user",
+        "TestUserAPI",
+        "test_user_service.py",
+        "x-service"
+      ],
+      "setup": { "duration": 0.00013865900109522045, "outcome": "passed" },
+      "call": { "duration": 0.0001369319979858119, "outcome": "passed" },
+      "teardown": { "duration": 0.0002484930009813979, "outcome": "passed" }
+    },
+    {
+      "nodeid": "test_user_service.py::TestUserValidation::test_email_validation",
+      "lineno": 20,
+      "outcome": "passed",
+      "keywords": [
+        "test_email_validation",
+        "TestUserValidation",
+        "test_user_service.py",
+        "x-service"
+      ],
+      "setup": { "duration": 0.00016738999693188816, "outcome": "passed" },
+      "call": { "duration": 0.00014529400141327642, "outcome": "passed" },
+      "teardown": { "duration": 0.00018982099936692975, "outcome": "passed" }
+    },
+    {
+      "nodeid": "test_user_service.py::TestUserValidation::test_password_validation",
+      "lineno": 24,
+      "outcome": "passed",
+      "keywords": [
+        "test_password_validation",
+        "TestUserValidation",
+        "test_user_service.py",
+        "x-service"
+      ],
+      "setup": { "duration": 0.000133988000015961, "outcome": "passed" },
+      "call": { "duration": 0.00012929000149597414, "outcome": "passed" },
+      "teardown": { "duration": 0.00023500200040871277, "outcome": "passed" }
+    }
+  ]
+}
