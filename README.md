@@ -41,7 +41,7 @@ git submodule update --init --recursive
 
 ```bash
 # For a normal startup:
-./run.sh
+./run.sh && docker exec -it poly-micro-backend python -u setup_demo.py && docker-compose logs -f
 ```
 
 This will start:
